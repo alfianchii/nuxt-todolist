@@ -19,4 +19,7 @@ export default defineNuxtConfig({
             extensions: ['.vue'],
         },
     ],
+    imports: {
+        dirs: ['composables/**'],
+    },
 });
