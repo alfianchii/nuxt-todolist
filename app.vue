@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const initMsg: Message = { type: 'error', msg: '' };
+const initMsg: Message = errorMessage('');
 const message = ref<Message>(initMsg);
 
 function handleUpdateMessage(newMessage: Message) {
@@ -11,6 +11,7 @@ function handleUpdateMessage(newMessage: Message) {
     <div class="container min-w-full px-10 lg:px-32">
         <MainHeader />
 
+        <BaseToast />
         <TodoList
             :message="message"
             @update:todo-message="handleUpdateMessage"

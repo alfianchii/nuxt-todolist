@@ -1,63 +1,23 @@
-<script setup lang="ts">
-type CheckTypeElement = 'bg' | 'hover';
-
-let { data } = defineProps<{
-    data: Message;
-}>();
-
-const emit = defineEmits<{
-    'update:message': [data: Message];
-}>();
-
-function checkType(element: CheckTypeElement) {
-    if (element === 'bg') {
-        if (data.type === 'error') return 'bg-red-500';
-        if (data.type === 'success') return 'bg-green-500';
-    }
-
-    if (element === 'hover') {
-        if (data.type === 'error') return 'hover:bg-red-400';
-        if (data.type === 'success') return 'hover:bg-green-400';
-    }
-}
-
-function removeToast() {
-    const toast: HTMLElement = document.querySelector('#toast') as HTMLElement;
-    toast.classList.remove('opacity-100');
-    toast.classList.add('opacity-0');
-    setTimeout(() => {
-        data = { type: 'error', msg: '' };
-        emit('update:message', data);
-    }, 300);
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
     <div
-        :class="[
-            'fixed top-0 right-0 mt-4 transition-all duration-300 me-4',
-            data.msg ? 'opacity-100' : 'opacity-0',
-        ]"
+        class="fixed top-0 right-0 mt-4 transition-all duration-300 opacity-0 me-4"
         id="toast"
     >
         <div class="flex items-center justify-center">
             <div
-                :class="[
-                    checkType('bg'),
-                    'flex items-center justify-center px-5 py-6 text-white rounded-lg',
-                ]"
+                id="toast-body"
+                class="flex items-center justify-center px-5 py-6 text-white rounded-lg"
             >
-                <div class="space-x-1">
-                    <span class="font-bold capitalize">{{ data.type }}!</span>
-                    <span class="text-center">{{ data.msg }}</span>
+                <div>
+                    <span class="font-bold capitalize" id="toast-type"></span>!
+                    <span class="text-center" id="toast-message"></span>
                 </div>
 
                 <button
-                    @click="removeToast"
-                    :class="[
-                        checkType('hover'),
-                        'p-2 transition-all duration-300 rounded-md ms-3',
-                    ]"
+                    id="toast-btn"
+                    class="p-2 transition-all duration-300 rounded-md ms-3"
                 >
                     <svg
                         class="flex-shrink-0 size-4"
