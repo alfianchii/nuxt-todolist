@@ -3,7 +3,9 @@
 <template>
     <p class="mt-6 font-mono text-center text-gray-600">
         A simple todo-app built with
-        <a class="rounded bg-[#8883] p-[.25rem] space-x-0.5">
+        <a
+            class="rounded bg-[#8883] p-[.25rem] space-x-0.5 hover:bg-[#8884] transition-all duration-300"
+        >
             <img
                 width="18"
                 src="https://nuxt.com/icon.png"
@@ -13,7 +15,9 @@
             <span class="text-sm text-black">Nuxt</span>
         </a>
         and
-        <a class="rounded bg-[#8883] p-[.25rem] space-x-0.5">
+        <a
+            class="rounded bg-[#8883] p-[.25rem] space-x-0.5 hover:bg-[#8884] transition-all duration-300"
+        >
             <img
                 width="18"
                 src="https://vitejs.dev/logo-with-shadow.png"
@@ -23,7 +27,9 @@
             <span class="text-sm text-black">Vite</span>
         </a>
         with
-        <a class="rounded bg-[#8883] p-[.25rem] space-x-0.5">
+        <a
+            class="rounded bg-[#8883] p-[.25rem] space-x-0.5 hover:bg-[#8884] transition-all duration-300"
+        >
             <img
                 width="18"
                 src="https://www.typescriptlang.org/icons/icon-512x512.png"

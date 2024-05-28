@@ -18,7 +18,15 @@ export const getToastColors = (
     btnHoverColor,
 });
 
-export function hideToast(toastColors: ToastColors) {
+export const generateToastElements = (): ToastElement => ({
+    root: document.querySelector('#toast') as HTMLElement,
+    body: document.querySelector('#toast-body') as HTMLElement,
+    type: document.querySelector('#toast-type') as HTMLElement,
+    message: document.querySelector('#toast-message') as HTMLElement,
+    btn: document.querySelector('#toast-btn') as HTMLButtonElement,
+});
+
+export const hideToast = (toastColors: ToastColors) => {
     const toast: ToastElement = generateToastElements();
 
     toast.root.classList.remove('opacity-100');
@@ -30,20 +38,20 @@ export function hideToast(toastColors: ToastColors) {
         toast.type.textContent = '';
         toast.message.textContent = '';
     }, TOAST_TRANSITION);
-}
+};
 
-export function clearToast(toast: ToastElement) {
+export const clearToast = (toast: ToastElement) => {
     removeParticularClass('bg-', toast.body);
     removeParticularClass('hover:', toast.btn);
 
     toast.type.textContent = '';
     toast.message.textContent = '';
-}
+};
 
-export function activateToast(
+export const activateToast = (
     toastColors: ToastColors,
     message: Message,
-): NodeJS.Timeout {
+): NodeJS.Timeout => {
     const toast: ToastElement = generateToastElements();
     clearToast(toast);
 
@@ -59,12 +67,4 @@ export function activateToast(
     toast.btn.addEventListener('click', () => hideToast(toastColors));
 
     return setTimeout(() => hideToast(toastColors), TOAST_DURATION);
-}
-
-export const generateToastElements = (): ToastElement => ({
-    root: document.querySelector('#toast') as HTMLElement,
-    body: document.querySelector('#toast-body') as HTMLElement,
-    type: document.querySelector('#toast-type') as HTMLElement,
-    message: document.querySelector('#toast-message') as HTMLElement,
-    btn: document.querySelector('#toast-btn') as HTMLButtonElement,
-});
+};
