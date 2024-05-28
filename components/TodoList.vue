@@ -8,6 +8,7 @@ const emit = defineEmits<{
     'update:todo-message': [message: Message];
 }>();
 
+const isEdit = ref<boolean>(false);
 const timeoutId = ref<NodeJS.Timeout>();
 const toastColors = ref<ToastColors>();
 
@@ -40,6 +41,20 @@ function addTodo() {
     timeoutId.value = activateToast(toastColors.value, message);
 }
 
+function updateTodo(todo: Todo) {
+    isEdit.value = true;
+    const todoInput: HTMLInputElement = document.querySelector(
+        '#todo-input',
+    ) as HTMLInputElement;
+    todoInput.focus();
+    todoInput.value = todo.activity;
+}
+
+function removeTodo(todo: Todo) {
+    todos.value = todos.value.filter((i: Todo) => i.id !== todo.id);
+    isEdit.value = false;
+}
+
 function handleUpdateActivity(newActivity: string) {
     activity.value = newActivity;
 }
@@ -48,8 +63,13 @@ function handleUpdateActivity(newActivity: string) {
 <template>
     <TodoListInput
         :data="activity"
+        :editable="isEdit"
         @update:data="handleUpdateActivity"
         @addTodo="addTodo"
     />
-    <TodoListTable :todos="todos" />
+    <TodoListTable
+        :todos="todos"
+        @remove:todo="removeTodo"
+        @update:todo="updateTodo"
+    />
 </template>

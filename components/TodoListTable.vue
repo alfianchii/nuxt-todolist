@@ -2,6 +2,19 @@
 const { todos } = defineProps<{
     todos: Todo[];
 }>();
+
+const emit = defineEmits<{
+    'update:todo': [todo: Todo];
+    'remove:todo': [todo: Todo];
+}>();
+
+function handleUpdateTodo(todo: Todo) {
+    emit('update:todo', todo);
+}
+
+function handleRemoveTodo(todo: Todo) {
+    emit('remove:todo', todo);
+}
 </script>
 
 <template>
@@ -12,7 +25,11 @@ const { todos } = defineProps<{
                     <div class="overflow-hidden border rounded-lg shadow">
                         <table class="min-w-full divide-y divide-gray-200">
                             <TodoListTableHeader />
-                            <TodoListTableBody :todos="todos" />
+                            <TodoListTableBody
+                                :todos="todos"
+                                @update:todo="handleUpdateTodo"
+                                @remove:todo="handleRemoveTodo"
+                            />
                         </table>
                     </div>
                 </div>
