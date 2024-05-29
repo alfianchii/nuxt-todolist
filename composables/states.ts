@@ -14,6 +14,11 @@ export const successMessage = (msg: string): Message => ({
     msg,
 });
 
+export const warningMessage = (msg: string): Message => ({
+    type: 'warning',
+    msg,
+});
+
 export const removeParticularClass = (str: string, element: HTMLElement) =>
     element.classList.forEach((className: string) =>
         className.startsWith(str) ? element.classList.remove(className) : null,

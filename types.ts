@@ -1,4 +1,4 @@
-type ResponseTypes = 'success' | 'error';
+type ResponseTypes = 'success' | 'error' | 'warning';
 
 interface Todo {
     id: number;

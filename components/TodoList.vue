@@ -48,6 +48,21 @@ function updateTodo(todo: Todo) {
         return;
     }
 
+    if (activity.value === todo.activity) {
+        toastColors.value = getToastColors(
+            'bg-yellow-500',
+            'hover:bg-yellow-400',
+        );
+        message = warningMessage(
+            'You have not made any changes to the activity.',
+        );
+        emit('update:todo-message', message);
+        timeoutId.value = activateToast(toastColors.value, message);
+        activity.value = '';
+        isEdit.value = false;
+        return;
+    }
+
     const newTodo = { ...todo, activity: activity.value };
     todos.value = todos.value.map((todo: Todo) =>
         todo.id === newTodo.id ? newTodo : todo,
