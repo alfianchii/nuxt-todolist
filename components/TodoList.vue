@@ -1,6 +1,5 @@
 <script setup lang="ts">
 function addTodo() {
-    if (timeoutId.value) clearInterval(timeoutId.value);
     setMessage('error', '');
 
     if (!activity.value) {
@@ -32,6 +31,7 @@ function updateTodo(todo: Todo) {
         toastColors.value = getToastColors('bg-red-500', 'hover:bg-red-400');
         setMessage('error', 'Activity cannot be empty.');
         activateToast(toastColors.value, message.value);
+
         activity.value = todo.activity;
         return;
     }
@@ -43,6 +43,7 @@ function updateTodo(todo: Todo) {
         );
         setMessage('warning', 'You have not made any changes to the activity.');
         activateToast(toastColors.value, message.value);
+
         activity.value = '';
         isEdit.value = false;
         return;
