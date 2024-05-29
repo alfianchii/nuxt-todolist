@@ -1,21 +1,12 @@
 <script setup lang="ts">
-let { message } = defineProps<{
-    message: Message;
-}>();
-const emit = defineEmits<{
-    'update:todo-message': [message: Message];
-}>();
-
 function addTodo() {
     if (timeoutId.value) clearInterval(timeoutId.value);
-    message = errorMessage('');
-    emit('update:todo-message', message);
+    setMessage('error', '');
 
     if (!activity.value) {
         toastColors.value = getToastColors('bg-red-500', 'hover:bg-red-400');
-        message = errorMessage('Activity cannot be empty.');
-        emit('update:todo-message', message);
-        timeoutId.value = activateToast(toastColors.value, message);
+        setMessage('error', 'Activity cannot be empty.');
+        activateToast(toastColors.value, message.value);
         return;
     }
 
@@ -30,20 +21,17 @@ function addTodo() {
     activity.value = '';
 
     toastColors.value = getToastColors('bg-green-500', 'hover:bg-green-400');
-    message = successMessage('Activity added successfully.');
-    emit('update:todo-message', message);
-    timeoutId.value = activateToast(toastColors.value, message);
+    setMessage('success', 'Activity added successfully.');
+    activateToast(toastColors.value, message.value);
 }
 
 function updateTodo(todo: Todo) {
-    message = errorMessage('');
-    emit('update:todo-message', message);
+    setMessage('error', '');
 
     if (!activity.value) {
         toastColors.value = getToastColors('bg-red-500', 'hover:bg-red-400');
-        message = errorMessage('Activity cannot be empty.');
-        emit('update:todo-message', message);
-        timeoutId.value = activateToast(toastColors.value, message);
+        setMessage('error', 'Activity cannot be empty.');
+        activateToast(toastColors.value, message.value);
         activity.value = todo.activity;
         return;
     }
@@ -53,11 +41,8 @@ function updateTodo(todo: Todo) {
             'bg-yellow-500',
             'hover:bg-yellow-400',
         );
-        message = warningMessage(
-            'You have not made any changes to the activity.',
-        );
-        emit('update:todo-message', message);
-        timeoutId.value = activateToast(toastColors.value, message);
+        setMessage('warning', 'You have not made any changes to the activity.');
+        activateToast(toastColors.value, message.value);
         activity.value = '';
         isEdit.value = false;
         return;
@@ -70,9 +55,8 @@ function updateTodo(todo: Todo) {
     activity.value = '';
 
     toastColors.value = getToastColors('bg-blue-500', 'hover:bg-blue-400');
-    message = successMessage('Activity updated successfully.');
-    emit('update:todo-message', message);
-    timeoutId.value = activateToast(toastColors.value, message);
+    setMessage('success', 'Activity updated successfully.');
+    activateToast(toastColors.value, message.value);
 
     isEdit.value = false;
 }
@@ -97,9 +81,8 @@ function doneTodo(todo: Todo) {
     );
 
     toastColors.value = getToastColors('bg-green-500', 'hover:bg-green-400');
-    message = successMessage('Your activity has been marked as done.');
-    emit('update:todo-message', message);
-    timeoutId.value = activateToast(toastColors.value, message);
+    setMessage('success', 'Your activity has been marked as done.');
+    activateToast(toastColors.value, message.value);
 }
 
 function handleUpdateActivity(newActivity: string) {

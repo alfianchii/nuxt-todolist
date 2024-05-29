@@ -2,22 +2,14 @@ export const todos = useLocalStorage<Todo[]>('todos', []);
 export const activity = ref<string>('');
 export const toastColors = ref<ToastColor>();
 export const isEdit = ref<boolean>(false);
+export const message = ref<Message>({ type: 'error', msg: '' });
 export const timeoutId = ref<NodeJS.Timeout>();
 
-export const errorMessage = (msg: string): Message => ({
-    type: 'error',
-    msg,
-});
-
-export const successMessage = (msg: string): Message => ({
-    type: 'success',
-    msg,
-});
-
-export const warningMessage = (msg: string): Message => ({
-    type: 'warning',
-    msg,
-});
+export const setMessage = (type: ResponseTypes, msg: string): Message =>
+    (message.value = {
+        type,
+        msg,
+    });
 
 export const removeParticularClass = (str: string, element: HTMLElement) =>
     element.classList.forEach((className: string) =>
@@ -62,10 +54,7 @@ export const clearToast = (toast: ToastElement) => {
     toast.message.textContent = '';
 };
 
-export const activateToast = (
-    toastColors: ToastColor,
-    message: Message,
-): NodeJS.Timeout => {
+export const activateToast = (toastColors: ToastColor, message: Message) => {
     if (timeoutId.value) clearTimeout(timeoutId.value);
     const toast: ToastElement = generateToastElements();
     clearToast(toast);
@@ -81,5 +70,5 @@ export const activateToast = (
 
     toast.btn.addEventListener('click', () => hideToast(toastColors));
 
-    return setTimeout(() => hideToast(toastColors), TOAST_DURATION);
+    timeoutId.value = setTimeout(() => hideToast(toastColors), TOAST_DURATION);
 };
