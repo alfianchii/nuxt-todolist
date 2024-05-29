@@ -6,6 +6,7 @@ const { todos } = defineProps<{
 const emit = defineEmits<{
     'update:todo': [todo: Todo];
     'remove:todo': [todo: Todo];
+    'done:todo': [todo: Todo];
 }>();
 
 function handleUpdateTodo(todo: Todo) {
@@ -14,6 +15,10 @@ function handleUpdateTodo(todo: Todo) {
 
 function handleRemoveTodo(todo: Todo) {
     emit('remove:todo', todo);
+}
+
+function handleDoneTodo(todo: Todo) {
+    emit('done:todo', todo);
 }
 </script>
 
@@ -29,6 +34,7 @@ function handleRemoveTodo(todo: Todo) {
                                 :todos="todos"
                                 @update:todo="handleUpdateTodo"
                                 @remove:todo="handleRemoveTodo"
+                                @done:todo="handleDoneTodo"
                             />
                         </table>
                     </div>

@@ -6,6 +6,7 @@ const { todos } = defineProps<{
 const emit = defineEmits<{
     'update:todo': [todo: Todo];
     'remove:todo': [todo: Todo];
+    'done:todo': [todo: Todo];
 }>();
 
 function isDoneTodo(todo: Todo) {
@@ -23,6 +24,10 @@ function handleUpdateTodo(todo: Todo) {
 function handleRemoveTodo(todo: Todo) {
     emit('remove:todo', todo);
 }
+
+function handleDoneTodo(todo: Todo) {
+    emit('done:todo', todo);
+}
 </script>
 
 <template>
@@ -32,7 +37,10 @@ function handleRemoveTodo(todo: Todo) {
                 <td
                     class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap"
                 >
-                    {{ todo.activity }}
+                    <span v-if="!todo.isDone">{{ todo.activity }}</span>
+                    <span v-if="todo.isDone" class="line-through">{{
+                        todo.activity
+                    }}</span>
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                     <span class="px-2 py-1 border border-gray-500 rounded">
@@ -42,6 +50,27 @@ function handleRemoveTodo(todo: Todo) {
                 <td
                     class="px-6 py-4 text-sm font-medium text-center whitespace-nowrap"
                 >
+                    <button
+                        v-if="!todo.isDone"
+                        @click="handleDoneTodo(todo)"
+                        type="button"
+                        class="inline-flex items-center text-sm font-semibold text-green-500 transition-all duration-300 border border-transparent rounded-lg gap-x-2 hover:text-green-700 disabled:opacity-50 disabled:pointer-events-none"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="size-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="m4.5 12.75 6 6 9-13.5"
+                            />
+                        </svg>
+                    </button>
                     <button
                         @click="handleUpdateTodo(todo)"
                         type="button"
@@ -58,7 +87,7 @@ function handleRemoveTodo(todo: Todo) {
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
                             />
                         </svg>
                     </button>

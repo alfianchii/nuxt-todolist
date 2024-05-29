@@ -91,6 +91,17 @@ function removeTodo(todo: Todo) {
     isEdit ?? cancelTodo();
 }
 
+function doneTodo(todo: Todo) {
+    todos.value = todos.value.map((i: Todo) =>
+        i.id === todo.id ? { ...i, isDone: !i.isDone } : i,
+    );
+
+    toastColors.value = getToastColors('bg-green-500', 'hover:bg-green-400');
+    message = successMessage('Your activity has been marked as done.');
+    emit('update:todo-message', message);
+    timeoutId.value = activateToast(toastColors.value, message);
+}
+
 function handleUpdateActivity(newActivity: string) {
     activity.value = newActivity;
 }
@@ -108,5 +119,6 @@ function handleUpdateActivity(newActivity: string) {
         :todos="todos"
         @remove:todo="removeTodo"
         @update:todo="updateTodo"
+        @done:todo="doneTodo"
     />
 </template>
