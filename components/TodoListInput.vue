@@ -16,7 +16,7 @@ function handleUpdateActivity(newActivity: string) {
 </script>
 
 <template>
-    <main class="mt-12">
+    <main class="mt-8">
         <div class="flex">
             <BaseInput
                 id="todo-input"

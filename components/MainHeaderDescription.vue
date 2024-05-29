@@ -45,7 +45,7 @@
     >
         #I'mぷろぐらまー
         <span
-            class="top-[26px] left-4 absolute inline-block h-[39px] before:block before:absolute before:-inset-[1px] before:bg-gray-600"
+            class="top-[26px] left-4 absolute inline-block h-[23px] before:block before:absolute before:-inset-[1px] before:bg-gray-600"
         >
         </span>
         <span>
@@ -117,7 +117,7 @@
             </span>
         </span>
         <span
-            class="top-[26px] right-4 absolute inline-block h-[39px] before:block before:absolute before:-inset-[1px] before:bg-gray-600"
+            class="top-[26px] right-4 absolute inline-block h-[23px] before:block before:absolute before:-inset-[1px] before:bg-gray-600"
         >
         </span>
     </p>
