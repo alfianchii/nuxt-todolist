@@ -22,21 +22,21 @@ function handleUpdateActivity(newActivity: string) {
                 class="relative w-[40%] mx-auto sm:w-[35%] md:w-[30%] lg:w-[25%] xl:w-[20%] 2xl:w-[20%]"
             >
                 <div
-                    class="absolute left-0 right-0 bottom-10 before:block before:absolute before:-inset-[1px] before:bg-gray-900"
+                    class="absolute left-0 right-0 bottom-10 before:block before:absolute before:-inset-[1px] before:bg-gray-600"
                 ></div>
             </div>
             <div
-                class="relative w-[38px] right-0 left-[59.2%] sm:left-[58.8%] md:left-[57.7%] lg:left-[55.3%] xl:left-[54.5s%] 2xl:left-[55.5%]"
+                class="relative w-[38px] right-0 left-[58.2%] sm:left-[58.8%] md:left-[57.7%] lg:left-[55.3%] xl:left-[54.5s%] 2xl:left-[55.5%]"
             >
                 <div
-                    class="absolute left-0 rounded-full right-0 bottom-5 before:block before:absolute before:-inset-[1px] before:rotate-90 before:bg-gray-900"
+                    class="absolute left-0 rounded-full right-0 bottom-5 before:block before:absolute before:-inset-[1px] before:rotate-90 before:bg-gray-600"
                 ></div>
             </div>
             <div
                 class="relative w-[38px] right-0 left-[32.8%] sm:left-[35.6%] md:left-[37.9%] lg:left-[40.48%] xl:left-[42%] 2xl:left-[42.5%]"
             >
                 <div
-                    class="absolute left-0 rounded-full right-0 bottom-5 before:block before:absolute before:-inset-[1px] before:rotate-90 before:bg-gray-900"
+                    class="absolute left-0 rounded-full right-0 bottom-5 before:block before:absolute before:-inset-[1px] before:rotate-90 before:bg-gray-600"
                 ></div>
             </div>
         </div>
