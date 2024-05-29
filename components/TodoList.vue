@@ -36,18 +36,44 @@ function addTodo() {
 }
 
 function updateTodo(todo: Todo) {
-    isEdit.value = true;
+    message = errorMessage('');
+    emit('update:todo-message', message);
+
+    if (!activity.value) {
+        toastColors.value = getToastColors('bg-red-500', 'hover:bg-red-400');
+        message = errorMessage('Activity cannot be empty.');
+        emit('update:todo-message', message);
+        timeoutId.value = activateToast(toastColors.value, message);
+        activity.value = todo.activity;
+        return;
+    }
+
+    const newTodo = { ...todo, activity: activity.value };
+    todos.value = todos.value.map((todo: Todo) =>
+        todo.id === newTodo.id ? newTodo : todo,
+    );
+    activity.value = '';
+
+    toastColors.value = getToastColors('bg-blue-500', 'hover:bg-blue-400');
+    message = successMessage('Activity updated successfully.');
+    emit('update:todo-message', message);
+    timeoutId.value = activateToast(toastColors.value, message);
+
+    isEdit.value = false;
+}
+
+function cancelTodo() {
+    isEdit.value = false;
     const todoInput: HTMLInputElement = document.querySelector(
         '#todo-input',
     ) as HTMLInputElement;
-    todoInput.focus();
-    todoInput.value = todo.activity;
+    activity.value = '';
+    todoInput.value = '';
 }
 
 function removeTodo(todo: Todo) {
     todos.value = todos.value.filter((i: Todo) => i.id !== todo.id);
-    isEdit.value = false;
-    activity.value = '';
+    isEdit ?? cancelTodo();
 }
 
 function handleUpdateActivity(newActivity: string) {
@@ -58,9 +84,10 @@ function handleUpdateActivity(newActivity: string) {
 <template>
     <TodoListInput
         :data="activity"
-        :editable="isEdit"
         @update:data="handleUpdateActivity"
         @addTodo="addTodo"
+        @cancelTodo="cancelTodo"
+        @update:todo="updateTodo"
     />
     <TodoListTable
         :todos="todos"

@@ -13,7 +13,11 @@ function isDoneTodo(todo: Todo) {
 }
 
 function handleUpdateTodo(todo: Todo) {
-    emit('update:todo', todo);
+    const input = document.querySelector('#todo-input') as HTMLInputElement;
+    activity.value = todo.activity;
+    input.focus();
+    input.setAttribute('todo-id', todo.id.toString());
+    isEdit.value = true;
 }
 
 function handleRemoveTodo(todo: Todo) {

@@ -1,13 +1,32 @@
 <script setup lang="ts">
-const { data, editable } = defineProps<{
+const { data } = defineProps<{
     data: string;
-    editable: boolean;
 }>();
 
-const emit = defineEmits(['update:data', 'addTodo']);
+const emit = defineEmits<{
+    'update:data': [data: string];
+    addTodo: [];
+    cancelTodo: [];
+    'update:todo': [todo: Todo];
+}>();
 
 function addTodo() {
     emit('addTodo');
+}
+
+function updateTodo() {
+    const input = document.querySelector('#todo-input') as HTMLInputElement;
+    const todoId = input.getAttribute('todo-id') ?? (0 as number);
+    const todo: Todo = todos.value.filter((i: Todo) => i.id == todoId)[0];
+    emit('update:todo', todo);
+}
+
+function enteredInput() {
+    isEdit.value ? updateTodo() : addTodo();
+}
+
+function cancelTodo() {
+    emit('cancelTodo');
 }
 
 function handleUpdateActivity(newActivity: string) {
@@ -22,7 +41,7 @@ function handleUpdateActivity(newActivity: string) {
                 id="todo-input"
                 autofocus
                 :model-value="data"
-                @keyup.enter="addTodo"
+                @keyup.enter="enteredInput"
                 placeholder="Write your activity here ..."
                 @update:model-value="handleUpdateActivity"
             />
@@ -30,17 +49,17 @@ function handleUpdateActivity(newActivity: string) {
             <BaseDivider />
 
             <BaseButton
-                v-if="!editable"
+                v-if="!isEdit"
                 @click="addTodo"
                 txt="Add"
                 class="rounded-e-lg"
             />
 
-            <template v-if="editable">
-                <BaseButton @click="addTodo" txt="Edit" />
+            <template v-if="isEdit">
+                <BaseButton @click="updateTodo" txt="Edit" />
                 <BaseDivider />
                 <BaseButton
-                    @click="addTodo"
+                    @click="cancelTodo"
                     txt="Cancel"
                     class="rounded-e-lg"
                 />

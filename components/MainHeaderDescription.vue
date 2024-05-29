@@ -41,7 +41,7 @@
     </p>
 
     <p
-        class="px-3 mt-1 relative font-mono font-bold border-2 border-gray-600 -mb-[9px]"
+        class="px-3 mt-1 relative font-mono font-bold border-2 rounded-t-md border-gray-600 -mb-[9px]"
     >
         #I'mぷろぐらまー
         <span

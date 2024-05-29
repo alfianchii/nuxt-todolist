@@ -61,6 +61,7 @@ export const activateToast = (
     toastColors: ToastColors,
     message: Message,
 ): NodeJS.Timeout => {
+    if (timeoutId.value) clearTimeout(timeoutId.value);
     const toast: ToastElement = generateToastElements();
     clearToast(toast);
 
