@@ -1,9 +1,18 @@
-export const errorMessage = (msg: string): Message => {
-    return {
-        type: 'error',
-        msg,
-    };
-};
+export const todos = ref<Todo[]>([]);
+export const activity = ref<string>('');
+export const toastColors = ref<ToastColors>();
+export const isEdit = ref<boolean>(false);
+export const timeoutId = ref<NodeJS.Timeout>();
+
+export const errorMessage = (msg: string): Message => ({
+    type: 'error',
+    msg,
+});
+
+export const successMessage = (msg: string): Message => ({
+    type: 'success',
+    msg,
+});
 
 export const removeParticularClass = (str: string, element: HTMLElement) =>
     element.classList.forEach((className: string) =>

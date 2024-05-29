@@ -10,7 +10,6 @@ function handleUpdateMessage(newMessage: Message) {
 <template>
     <div class="container min-w-full px-10 lg:px-32">
         <MainHeader />
-
         <BaseToast />
         <TodoList
             :message="message"

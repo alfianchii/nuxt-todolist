@@ -1,16 +1,10 @@
 <script setup lang="ts">
-const todos = ref<Todo[]>([]);
-const activity = ref<string>('');
 let { message } = defineProps<{
     message: Message;
 }>();
 const emit = defineEmits<{
     'update:todo-message': [message: Message];
 }>();
-
-const isEdit = ref<boolean>(false);
-const timeoutId = ref<NodeJS.Timeout>();
-const toastColors = ref<ToastColors>();
 
 function addTodo() {
     if (timeoutId.value) clearInterval(timeoutId.value);
@@ -36,7 +30,7 @@ function addTodo() {
     activity.value = '';
 
     toastColors.value = getToastColors('bg-green-500', 'hover:bg-green-400');
-    message = { type: 'success', msg: 'Activity added successfully!' };
+    message = successMessage('Activity added successfully.');
     emit('update:todo-message', message);
     timeoutId.value = activateToast(toastColors.value, message);
 }
@@ -53,6 +47,7 @@ function updateTodo(todo: Todo) {
 function removeTodo(todo: Todo) {
     todos.value = todos.value.filter((i: Todo) => i.id !== todo.id);
     isEdit.value = false;
+    activity.value = '';
 }
 
 function handleUpdateActivity(newActivity: string) {
