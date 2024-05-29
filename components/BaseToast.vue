@@ -2,7 +2,7 @@
 
 <template>
     <div
-        class="fixed top-0 right-0 mt-4 transition-all duration-300 opacity-0 me-4"
+        class="fixed top-0 right-0 mt-4 transition-all duration-300 opacity-0 mx-4"
         id="toast"
     >
         <div class="flex items-center justify-center">
