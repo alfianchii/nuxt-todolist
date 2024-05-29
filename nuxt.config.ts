@@ -21,5 +21,7 @@ export default defineNuxtConfig({
     ],
     imports: {
         dirs: ['composables/**'],
+        autoImport: true,
     },
+    modules: ['@vueuse/nuxt'],
 });

@@ -15,7 +15,7 @@ type BackgroundColor = `bg-${string}`;
 
 type HoverColor = `hover:${string}`;
 
-interface ToastColors {
+interface ToastColor {
     bgColor: BackgroundColor;
     btnHoverColor: HoverColor;
 }

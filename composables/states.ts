@@ -1,6 +1,6 @@
-export const todos = ref<Todo[]>([]);
+export const todos = useLocalStorage<Todo[]>('todos', []);
 export const activity = ref<string>('');
-export const toastColors = ref<ToastColors>();
+export const toastColors = ref<ToastColor>();
 export const isEdit = ref<boolean>(false);
 export const timeoutId = ref<NodeJS.Timeout>();
 
@@ -22,7 +22,7 @@ export const removeParticularClass = (str: string, element: HTMLElement) =>
 export const getToastColors = (
     bgColor: BackgroundColor,
     btnHoverColor: HoverColor,
-): ToastColors => ({
+): ToastColor => ({
     bgColor,
     btnHoverColor,
 });
@@ -35,7 +35,7 @@ export const generateToastElements = (): ToastElement => ({
     btn: document.querySelector('#toast-btn') as HTMLButtonElement,
 });
 
-export const hideToast = (toastColors: ToastColors) => {
+export const hideToast = (toastColors: ToastColor) => {
     const toast: ToastElement = generateToastElements();
 
     toast.root.classList.remove('opacity-100');
@@ -58,7 +58,7 @@ export const clearToast = (toast: ToastElement) => {
 };
 
 export const activateToast = (
-    toastColors: ToastColors,
+    toastColors: ToastColor,
     message: Message,
 ): NodeJS.Timeout => {
     if (timeoutId.value) clearTimeout(timeoutId.value);

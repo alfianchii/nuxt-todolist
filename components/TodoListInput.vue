@@ -42,7 +42,7 @@ function handleUpdateActivity(newActivity: string) {
                 autofocus
                 :model-value="data"
                 @keyup.enter="enteredInput"
-                placeholder="Write your activity here ..."
+                placeholder="Write your activity here >_<"
                 @update:model-value="handleUpdateActivity"
             />
 
